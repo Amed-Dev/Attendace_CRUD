@@ -1,6 +1,5 @@
-<?php 
-$conn = new mysqli("DB_HOST", "DB_USER", "DB_PASS", "DB_NAME");
-if ($conn->connect_error) { 
-  die("Error de conexión". $conn->connect_error);
+<?php
+$conn = new mysqli("127.0.0.1:3306", "root", "19384652", "attendace");
+if ($conn->connect_error) {
+  die("Error de conexión" . $conn->connect_error);
 }
-?>
