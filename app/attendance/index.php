@@ -1,23 +1,24 @@
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="dark">
+<html lang="en" data-bs-theme="">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../../assets/css/styles.css">
   <link rel="stylesheet" href="../../assets/css/all.min.css">
+  <link rel="stylesheet" href="./style.css">
   <title>Attendace CRUD</title>
 </head>
 
 <body>
   <div class="container p-4 my-2">
-    <h1 class="text-center my-3">Asitencia empleados</h1>
+    <h1 class="text-center my-3">Registro de Empleados</h1>
 
     <!-- Button trigger modal -->
-    <div class="row justify-content-end my-4">
+    <div class="row justify-content-end mb-5 my-5">
       <button type="button" class="btn btn-primary col-auto" data-bs-toggle="modal" data-bs-target="#modalSave"> <i
           class="fa-solid fa-circle-plus"></i>
-        Launch demo modal
+        Nuevo registro de asistencia
       </button>
     </div>
 
@@ -58,10 +59,6 @@
                 <label for="fecha" class="form-label">Fecha: </label>
                 <input type="text" class="form-control" id="fecha" placeholder="Nombre del trabajador">
               </div>
-              <div class="mb-3">
-                <label for="foto_perfil" class="form-label">Default file input example</label>
-                <input class="form-control" type="file" id="foto_perfil">
-              </div>
             </form>
           </div>
           <div class="modal-footer">
@@ -72,15 +69,16 @@
       </div>
     </div>
 
-    <table class="table  table-dark table-hover">
+    <table id="tabla" class="table table-hover">
       <thead class="text-center">
         <tr>
-          <th> # </th>
+          <th>DNI</th>
           <th> Nombre</th>
-          <th> Sector de trabajo</th>
+          <th>Departamento</th>
           <th> Cargo</th>
           <th> Asistencia</th>
           <th> Fecha</th>
+          <th> Acción</th>
         </tr>
       </thead>
       <tbody>
