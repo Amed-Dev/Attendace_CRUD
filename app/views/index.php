@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../../assets/css/styles.css">
   <link rel="stylesheet" href="../../assets/css/all.min.css">
+  <link rel="shortcut icon" href="../../assets/img/favicon.png" type="image/x-icon">
   <title>Attendace CRUD</title>
 </head>
 
@@ -75,9 +76,8 @@
     <table class="table  table-dark table-hover">
       <thead class="text-center">
         <tr>
-          <th> # </th>
+          <th> DNI </th>
           <th> Nombre</th>
-          <th> Sector de trabajo</th>
           <th> Cargo</th>
           <th> Asistencia</th>
           <th> Fecha</th>
@@ -94,17 +94,6 @@
         //?> -->
       </tbody>
     </table>
-    <div>
-      <h3>Colores de Bootstrap</h3>
-      <div class="bg-success border border-1 border-primary my-3 p-2 text-center fw-bold rounded-5">color success</div>
-      <div class="bg-info my-3 p-2 text-center fw-bold rounded-5">color info</div>
-      <div class="bg-warning my-3 p-2 text-center fw-bold rounded-5">color warning</div>
-      <div class="bg-primary my-3 p-2 text-center fw-bold rounded-5">color primary</div>
-      <div class="bg-danger my-3 p-2 text-center fw-bold rounded-5">color danger</div>
-    </div>
-    <div class="d-flex justify-content-center align-items-center">
-      <div class=" bg-info w-25 text-center">centrando contenido</div>
-    </div>
   </div>
   <script src="../../assets/js/bootstrap.bundle.min.js"></script>
 </body>
