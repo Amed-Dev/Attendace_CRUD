@@ -38,21 +38,34 @@
                 <input type="text" class="form-control" id="nombre" placeholder="Nombre del trabajador">
               </div>
               <div class="mb-3">
-                <label for="sector" class="form-label">Sector de trabajo: </label>
+                <label for="sector" class="form-label">Departamento: </label>
                 <select class="form-select" aria-label="Default select example">
-                  <option selected>Open this select menu</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
+                  <option selected>Seleccionar...</option>
+                  <option value="1">Recursos Humanos</option>
+                  <option value="2">Contabilidad</option>
+                  <option value="3">Gerencia</option>
+                  <option value="4">Departamento de Limpieza</option>
+                  <option value="5">Departamento de Seguridad</option>
                 </select>
               </div>
               <div class="mb-3">
                 <label for="cargo" class="form-label">Cargo: </label>
                 <select class="form-select" aria-label="Default select example">
-                  <option selected>Open this select menu</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
+                  <option selected>Seleccionar...</option>
+                  <option value="1"></option>
+                  <option value="2"></option>
+                  <option value="3"></option>
+                  <option value="4"></option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="cargo" class="form-label">Asistencia: </label>
+                <select class="form-select" aria-label="Default select example">
+                  <option selected>Seleccionar...</option>
+                  <option value="1">Presente</option>
+                  <option value="2">Falta</option>
+                  <option value="3">Tardanza</option>
+                  <option value="4">Permiso</option>
                 </select>
               </div>
               <div class="mb-3">
