@@ -1,6 +1,6 @@
-# <h1 align="center">Attendace CRUD</h1>
+# <h1 align="center">Attendance CRUD</h1>
 
-## Tecnlogías
+## Tecnologías
 
 **Cliente:** ![HTML](https://img.shields.io/badge/HTML_5-orange?logo=html5&logoColor=white)
 ![CSS](https://img.shields.io/badge/CSS_3-blue?logo=css3&logoColor=white)
@@ -16,7 +16,7 @@
 1. Clonar el proyecto
 
 ```bash
-  git clone https://github.com/Amed-Dev/Attendace_CRUD.git
+  git clone https://github.com/Amed-Dev/Attendance_CRUD.git
 ```
 
 2. Dirijete al directorio del proyecto
@@ -31,6 +31,7 @@
 
 > [!IMPORTANT] 
 >**DB** = BASE DE DATOS ⬇️
+>**Si la base de datos no tienes contraseña el tercer paramatro queda vacío ```""```**
 
 ```php
  $conn = new mysqli("127.0.0.1:3306", "root", "contraseña_DB", "attendace");
