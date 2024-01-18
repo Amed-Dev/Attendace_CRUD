@@ -94,18 +94,6 @@
         //?> -->
       </tbody>
     </table>
-    <div>
-      <h3>Colores de Bootstrap</h3>
-      <div class="bg-success border border-1 border-primary my-3 p-2 text-center fw-bold rounded-5">color success</div>
-      <div class="bg-info my-3 p-2 text-center fw-bold rounded-5">color info</div>
-      <div class="bg-warning my-3 p-2 text-center fw-bold rounded-5">color warning</div>
-      <div class="bg-primary my-3 p-2 text-center fw-bold rounded-5">color primary</div>
-      <div class="bg-danger my-3 p-2 text-center fw-bold rounded-5">color danger</div>
-    </div>
-    <div class="d-flex justify-content-center align-items-center">
-      <div class=" bg-info w-25 text-center">centrando contenido</div>
-    </div>
-  </div>
   <script src="../../assets/js/bootstrap.bundle.min.js"></script>
 </body>
 
