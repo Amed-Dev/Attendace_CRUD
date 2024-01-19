@@ -1,25 +1,44 @@
--- crear base de datos
-CREATE DATABASE attendance;
+-- Crear base de datos
+CREATE DATABASE IF NOT EXISTS attendance;
 
--- crear la tabla trabajador
-CREATE TABLE trabajador(
-  ID_TRABAJADOR INT AUTO_INCREMENT NOT NULL,
-  NOMBRE VARCHAR(150) NOT NULL,
-  SECTOR_TRABAJO  VARCHAR(150) NOT NULL,
-  CARGO VARCHAR(70) NOT NULL,
-  ID_ASISTENCIA INT NOT NULL,
-  ESTADO BIT NOT NULL,
-  PRIMARY KEY (ID_TRABAJADOR)
-  FOREIGN KEY (ID_ASISTENCIA) REFERENCES asistencia_estado(ID)
+-- Seleccionar la base de datos
+USE attendance;
+-- Crear tabla cargo
+CREATE TABLE cargo(
+  ID_CARGO INT AUTO_INCREMENT NOT NULL,
+  NOMBRE_CARGO VARCHAR(100) NOT NULL,
+  PRIMARY KEY(ID_CARGO)
 );
--- seleccionar los campos de la tabla trabajador
-SELECT * FROM trabajador;
 
--- crear tabla asistencia_estado
-CREATE TABLE asistencia_estado (
+-- Crear tabla empleado
+CREATE TABLE empleado(
+  ID_EMPLEADO INT AUTO_INCREMENT NOT NULL,
+  DNI INT NOT NULL,
+  NOMBRE VARCHAR(150) NOT NULL,
+  CARGO INT NOT NULL,
+  ACTIVO BIT(1) NOT NULL,
+  PRIMARY KEY (ID_EMPLEADO),
+  FOREIGN KEY (CARGO) REFERENCES cargo(ID_CARGO)
+);
+
+-- Crear tabla estado_asistencia
+CREATE TABLE estado_asistencia(
   ID INT AUTO_INCREMENT NOT NULL,
   ESTADO VARCHAR(30) NOT NULL,
   PRIMARY KEY (ID)
 );
--- seleccionar campos de la tabla asistencia_estado
-SELECT * FROM asistencia_estado;
+
+-- Crear tabla asistencia
+CREATE TABLE asistencia(
+  ID_ASISTENCIA INT AUTO_INCREMENT NOT NULL,
+  ID_EMPLEADO INT NOT NULL,
+  FECHA DATETIME NOT NULL DEFAULT NOW(),
+  ID_ESTADO INT NOT NULL,
+  PRIMARY KEY(ID_ASISTENCIA),
+  FOREIGN KEY(ID_EMPLEADO) REFERENCES empleado(ID_EMPLEADO) 
+    ON UPDATE CASCADE
+    ON DELETE CASCADE,
+  FOREIGN KEY(ID_ESTADO) REFERENCES estado_asistencia(ID) 
+)
+
+
