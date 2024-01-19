@@ -21,7 +21,13 @@
         Nuevo registro de asistencia
       </button>
     </div>
-
+ <!-- Button trigger modal -->
+ <div class="row justify-content-end mb-5 my-5">
+      <button type="button" class="btn btn-warning col-auto" data-bs-toggle="modal" data-bs-target="#editarRegistro"> <i
+          class="fa-solid fa-circle-plus"></i>
+        Editar empleado
+      </button>
+    </div>
 
     <!-- Modal -->
     <div class="modal fade" id="modalSave" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -105,7 +111,8 @@
         //?> -->
       </tbody>
     </table>
-  <script src="../../assets/js/bootstrap.bundle.min.js"></script>
+  <?php include "./empleado/empleado.php";?>
+    <script src="../../assets/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

@@ -1,4 +1,9 @@
 <!--modal empleado-->
+<?php
+    require_once "../../config/dataBase.php";
+    $query="SELECT ID_CARGO, NOMBRE_CARGO, DEPARTAMENTO FROM cargo";
+    $resultado= $conn->query($query);
+?>
 <div class="modal fade" id="editarRegistro" tabindex="-1" aria-labelledby="editarRegistroLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -17,9 +22,13 @@
                     <input type="text" name="nombre" id="nombre" class="form-control" required>
                 </div>
                 <div class="mb-3">
-                    <label for="departamento" class="form-label">Sector de trabajo</label>
-                    <select name="departamento" id="departamento" class="form-select" required> <option value="">Seleccionar...</option>
-
+                    <label for="sector" class="form-label">Sector de trabajo</label>
+                    <select name="sector" id="sector" class="form-select" required> <option value="">Seleccionar...</option>
+                    <?php
+                    while($fila=$resultado->fetch_assoc()){
+                        echo'<option value="'.$fila['ID_CARGO'].'">'.$fila['NOMBRE_CARGO'].'</option>';
+                    }
+                    ?>
                     </select>
                 </div>
 
@@ -35,7 +44,7 @@
 
                 </form>
             </div>
-            
+
         </div>
     </div>
 </div>

@@ -52,3 +52,5 @@ CREATE TABLE asistencia(
     ON DELETE CASCADE,
   FOREIGN KEY(ID_ESTADO) REFERENCES estado_asistencia(ID) 
 )
+
+
