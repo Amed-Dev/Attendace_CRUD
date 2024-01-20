@@ -76,7 +76,7 @@ CREATE TABLE estado_asistencia(
 );
 
 -- Crear tabla asistencia
-CREATE TABLE asistencia(
+CREATE TABLE registro_asistencia(
   ID_ASISTENCIA INT AUTO_INCREMENT NOT NULL,
   ID_EMPLEADO INT NOT NULL,
   FECHA DATETIME NOT NULL DEFAULT NOW(),
