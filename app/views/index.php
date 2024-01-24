@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="../../assets/css/styles.css">
   <link rel="stylesheet" href="../../assets/css/all.min.css">
   <link rel="stylesheet" href="./style.css">
+  <link rel="shortcut icon" href="../../assets/img/favicon.png" type="image/x-icon">
   <title>Attendace CRUD</title>
 </head>
 
@@ -51,11 +52,76 @@
               <div class="mb-3">
                 <label for="cargo" class="form-label">Cargo: </label>
                 <select class="form-select" aria-label="Default select example">
-                  <option selected>Seleccionar...</option>
-                  <option value="1"></option>
-                  <option value="2"></option>
-                  <option value="3"></option>
-                  <option value="4"></option>
+    <option selected>Seleccionar...</option>
+    <optgroup>
+    <optgroup label="Recursos Humanos">
+    <option value="1">Gerente de Recursos Humanos</option>
+    <option value="2">Asistente de Recursos Humanos</option>
+    <option value="3">Analista de Recursos Humanos</option>
+    <option value="4">Especialista en Capacitación</option>
+    <option value="5">Coordinador de Personal</option>
+    <option value="6">Asesor de Empleados</option>
+    <option value="7">Especialista en Beneficios</option>
+    <option value="8">Reclutador</option>
+    <option value="9">Asistente de Nómina</option>
+    <option value="10">Consultor de RRHH</option>
+    </optgroup>
+    <!-- Cargos para Contabilidad -->
+    <optgroup>
+    <optgroup label="Contabilidad">
+    <option value="11">Contador Principal</option>
+    <option value="12">Asistente de Contabilidad</option>
+    <option value="13">Analista Financiero</option>
+    <option value="14">Auditor Interno</option>
+    <option value="15">Especialista en Impuestos</option>
+    <option value="16">Controller Financiero</option>
+    <option value="17">Analista de Presupuesto</option>
+    <option value="18">Cajero</option>
+    <option value="19">Analista de Costos</option>
+    <option value="20">Economista</option>
+    </optgroup>
+    <!-- Cargos para Gerencia -->
+    <optgroup>
+    <optgroup label="Gerencia">
+    <option value="21">CEO</option>
+    <option value="22">Director Ejecutivo</option>
+    <option value="23">Vicepresidente</option>
+    <option value="24">Director de Operaciones</option>
+    <option value="25">Director de Marketing</option>
+    <option value="26">Director de Tecnología</option>
+    <option value="27">Director de Ventas</option>
+    <option value="28">Director de Recursos Humanos</option>
+    <option value="29">Director Financiero</option>
+    <option value="30">Gerente General</option>
+    </optgroup>
+    <!-- Cargos para Departamento de Limpieza -->
+    <optgroup>
+    <optgroup label="Departamento de Seguridad">
+    <option value="31">Supervisor de Limpieza</option>
+    <option value="32">Personal de Limpieza</option>
+    <option value="33">Encargado de Mantenimiento</option>
+    <option value="34">Operario de Limpieza</option>
+    <option value="35">Jefe de Logística</option>
+    <option value="36">Técnico de Limpieza</option>
+    <option value="37">Operador de Máquinas de Limpieza</option>
+    <option value="38">Asistente de Limpieza</option>
+    <option value="39">Coordinador de Limpieza</option>
+    <option value="40">Especialista en Desinfección</option>
+    </optgroup>
+    <!-- Cargos para Departamento de Seguridad -->
+    <optgroup>
+    <optgroup label="Departamento de Seguridad">
+    <option value="41">Jefe de Seguridad</option>
+    <option value="42">Guardia de Seguridad</option>
+    <option value="43">Supervisor de Seguridad</option>
+    <option value="44">Especialista en Seguridad Corporativa</option>
+    <option value="45">Oficial de Seguridad</option>
+    <option value="46">Técnico en Sistemas de Seguridad</option>
+    <option value="47">Inspector de Seguridad</option>
+    <option value="48">Guardia de Patrulla</option>
+    <option value="49">Coordinador de Seguridad</option>
+    <option value="50">Analista de Riesgos</option>
+    </optgroup>
                 </select>
               </div>
               <div class="mb-3">
@@ -69,8 +135,8 @@
                 </select>
               </div>
               <div class="mb-3">
-                <label for="fecha" class="form-label">Fecha: </label>
-                <input type="text" class="form-control" id="fecha" placeholder="Nombre del trabajador">
+                <label for="fecha" class="datetime">Fecha: </label>
+                <input type="date" class="form-control" id="fecha" placeholder="Nombre del trabajador">
               </div>
             </form>
           </div>
@@ -105,7 +171,16 @@
         //?> -->
       </tbody>
     </table>
-  <script src="../../assets/js/bootstrap.bundle.min.js"></script>
-</body>
+  </div>
+<?php include '../views/empleado/register.php'; ?>
+<?php include '../views/asistencia/asistencia.php'; ?>
+<?php include '../views/empleado/eliminarRegistro.php'; ?>
+<script src="../../assets/js/bootstrap.bundle.min.js"></script>
+<script>
+  var myModal = new bootstrap.Modal(document.getElementById('modalSave'), {
+    keyboard: false
+  });
+</script>
 
+</body>
 </html>
