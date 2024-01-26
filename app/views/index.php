@@ -175,6 +175,7 @@
 <?php include '../views/empleado/register.php'; ?>
 <?php include '../views/asistencia/asistencia.php'; ?>
 <?php include '../views/empleado/eliminarRegistro.php'; ?>
+
 <script src="../../assets/js/bootstrap.bundle.min.js"></script>
 <script>
   var myModal = new bootstrap.Modal(document.getElementById('modalSave'), {
