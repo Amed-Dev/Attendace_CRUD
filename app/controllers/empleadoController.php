@@ -2,17 +2,22 @@
 
 require_once "../models/empleado.php";
 
-if (isset($_POST['accion'])) {
-  $accion = $_POST['accion'];
-  switch ($variable) {
-    case 'getEmpleado':
-      $model = new Empleado();
-      $empleados = $model->getEmpleado();
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+  $accion = $_POST['method'];
+  $model = new Empleado();
+
+  switch ($accion) {
+    case 'getEmpleados':
+      $empleados = $model->getEmpleados();
+      echo json_encode($empleados);
+      break;
+    case 'getEmpleadosByID':
+      $empleados = $model->getEmpleadosByID($_POST);
       echo json_encode($empleados);
       break;
     case 'registerEmpleado':
-      $model = new Empleado();
-      $empleados = $model->registerEmpleado();
+      $empleados = $model->registerEmpleado($_POST);
       echo json_encode($empleados);
       break;
     // default:
