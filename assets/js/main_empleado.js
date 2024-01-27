@@ -329,7 +329,7 @@ modalDeleteE.addEventListener("shown.bs.modal", (event) => {
   getEmpleadosByID();
 });
 
-window.onload = function () {
+window.addEventListener("load", function () {
   getEmpleadosList();
   getDepartamento();
-};
+});

@@ -3,7 +3,6 @@
 require_once "../models/asistencia.php";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
   $accion = $_POST['method'];
   $model = new Asistencia();
 
@@ -12,10 +11,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $asistencia = $model->getSatusAttendace();
       echo json_encode($asistencia);
       break;
-    // case 'getEmpleadosByID':
-    //   $empleados = $model->getEmpleadosByID($_POST);
-    //   echo json_encode($empleados);
-    //   break;
+    case 'registerAttendance':
+      $asistencia = $model->registerAttendance($_POST);
+      echo json_encode($asistencia);
+      break;
     // case 'registerEmpleado':
     //   $empleados = $model->registerEmpleado($_POST);
     //   echo json_encode($empleados);
@@ -28,8 +27,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     //   $empleados = $model->deleteEmpleado($_POST);
     //   echo json_encode($empleados);
     //   break;
-    // default:
-    //   # code...
-    //   break;
+    case 'getEmpleadoByDNI':
+      $asistencia = $model->getSuggestionForDNI($_POST);
+      echo json_encode($asistencia);
+      break;
   }
 }

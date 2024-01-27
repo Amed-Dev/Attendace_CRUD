@@ -9,6 +9,7 @@ class Asistencia
     $db = Database::getInstance();
     $this->conn = $db->getConnection();
   }
+
   public function getSatusAttendace()
   {
     $sqlGA = $this->conn->prepare("SELECT * FROM estado_asistencia");
@@ -17,11 +18,11 @@ class Asistencia
       die("Error en la preparación de la consulta: " . $this->conn->error);
     }
     $sqlGA->execute();
-    $resultadoEmpleado = $sqlGA->get_result();
+    $resultadoAsistencia = $sqlGA->get_result();
 
     $estado_asistencia = [];
-    if ($resultadoEmpleado->num_rows > 0) {
-      while ($row = $resultadoEmpleado->fetch_assoc()) {
+    if ($resultadoAsistencia->num_rows > 0) {
+      while ($row = $resultadoAsistencia->fetch_assoc()) {
         $estado_asistencia[] = array(
           'id' => $row['ID'],
           'estado_asistencia' => $row['ESTADO'],
@@ -31,7 +32,7 @@ class Asistencia
 
     return $estado_asistencia;
   }
-  public function getEmpleadosByID($formData)
+  public function getListAttendance($formData)
   {
     $id = $formData['id'];
     $sqlGEID = $this->conn->prepare("SELECT * FROM empleado A 
@@ -60,29 +61,28 @@ class Asistencia
 
     return $empleadoID;
   }
-  public function registerEmpleado($formData)
+  public function registerAttendance($formData)
   {
     $result = array();
 
     $dni = $formData['dni'];
-    $nombre = $formData['nombre'];
-    $departamento = $formData['departamento'];
-    $cargo = $formData['cargo'];
+    $asistencia = $formData['asistencia'];
 
-    $sqlSE = $this->conn->prepare("INSERT INTO empleado(DNI, NOMBRE, DEPARTAMENTO, CARGO) VALUES(?,?,?,?)");
-    $sqlSE->bind_param("isii", $dni, $nombre, $departamento, $cargo);
-    $saveEmploye = $sqlSE->execute();
-    if ($saveEmploye) {
+    $sqlSA = $this->conn->prepare("INSERT INTO registro_asistencia (ID_EMPLEADO, ID_ESTADO)
+    VALUES (?, ?);");
+    $sqlSA->bind_param("ii", $dni, $asistencia);
+    $saveAttendance = $sqlSA->execute();
+    if ($saveAttendance) {
       $result['success'] = true;
-      $result['message'] = "El nuevo trabajador ha sido registrado exitosamente";
+      $result['message'] = "Las asistencia del trabajador ha sido registrada exitosamente";
     } else {
       $result['success'] = false;
-      $result['message'] = "No hemos podido registrar al nuevo trabajador, comuniquese con el encargado del TI";
+      $result['message'] = "No hemos podido registrar la asistencia del trabajador, comuniquese con el encargado del TI";
     }
     return $result;
   }
 
-  public function updateEmpleado($formData)
+  public function updateAttendance($formData)
   {
     $result = array();
 
@@ -97,10 +97,37 @@ class Asistencia
     $updateEmploye = $sqlSE->execute();
     if ($updateEmploye) {
       $result['success'] = true;
-      $result['message'] = "El trabajador ha sido actualizado exitosamente";
+      $result['message'] = "La asistencia ha actualizada exitosamente";
     } else {
       $result['success'] = false;
-      $result['message'] = "No hemos podido actualizar el trabajador, comuniquese con el encargado del TI";
+      $result['message'] = "No hemos podido actualizar la asistencia, comuniquese con el encargado del TI";
+    }
+    return $result;
+  }
+
+  public function getSuggestionForDNI($formData)
+  {
+    $result = array();
+    $dni = $formData['dni'];
+
+    $sqlGEID = $this->conn->prepare("SELECT NOMBRE FROM empleado WHERE DNI = ? LIMIT 1");
+
+    $sqlGEID->bind_param("i", $dni);
+
+    if ($sqlGEID === false) {
+      die("Error en la preparación de la consulta: " . $this->conn->error);
+    }
+    $sqlGEID->execute();
+    $resultadoEmpleadoID = $sqlGEID->get_result();
+
+    $empleado = [];
+    if ($resultadoEmpleadoID->num_rows > 0) {
+      while ($row = $resultadoEmpleadoID->fetch_assoc()) {
+        $empleado[] = $row['NOMBRE'];
+      }
+      $result['encontrado'] = $empleado[0];
+    } else {
+      $result['no_existe'] = "Usuario no se encuentra en la Base de Datos";
     }
     return $result;
   }

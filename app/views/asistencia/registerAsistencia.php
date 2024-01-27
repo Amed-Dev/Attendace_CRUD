@@ -13,10 +13,12 @@
             <label for="dni" class="form-label">DNI: </label>
             <input type="number" class="form-control" id="dni" name="dni" placeholder="80394852">
           </div>
-          <!-- <div class="mb-3">
-            <label for="nombre" class="form-label">Nombre: </label>
-            <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre del trabajador">
-          </div> -->
+          <div class="mb-3">
+            <div class="alert alert-warning d-none" id="txtHint"></div>
+            <label for="nombre" class="form-label">Nombre del trabajador: </label>
+            <input type="text" class="form-control" id="nombre" name="nombre" disabled
+              placeholder="...">
+          </div>
           <div class="mb-3">
             <label for="asistencia" class="form-label">Asistencia: </label>
             <select class="form-select asistencia" aria-label="Asistencia" name="asistencia">
