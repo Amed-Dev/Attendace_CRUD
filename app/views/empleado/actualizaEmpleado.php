@@ -7,7 +7,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="" method="POST" enctype="multipart/form-data" id="registerEmployeForm">
+        <form action="" method="POST" enctype="multipart/form-data" id="updateEmployeForm">
           <input type="hidden" id="id" name="id">
           <div class="mb-3">
             <label for="dni" class="form-label">DNI: </label>
@@ -30,11 +30,11 @@
               <option selected>Seleccionar...</option>
             </select>
           </div>
+          <div class="d-flex justify-content-end gap-4 ">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-primary"> <i class="fa-solid fa-floppy-disk"></i> Guardar</button>
+          </div>
         </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary"> <i class="fa-solid fa-floppy-disk"></i> Guardar</button>
       </div>
     </div>
   </div>

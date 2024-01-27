@@ -13,8 +13,8 @@
           <p>Esta acción no se podrá
             revertir</p>
         </div>
-        <form action="" method="POST">
-          <imput type="hidden" name="id" id="id">
+        <form action="" method="POST" id="deleteEmployeForm">
+          <input type="hidden" name="id" id="id">
         </form>
       </div>
       <div class="modal-footer">
@@ -24,7 +24,7 @@
 
         <div class="w-50">
           <button type="button" class="btn  btn-secondary col-5" data-bs-dismiss="modal">No</button>
-          <button type="sumbit" class="btn btn-danger col-5">Si</button>
+          <button type="submit" class="btn btn-danger col-5" id="btn-DE">Si</button>
         </div>
       </div>
     </div>

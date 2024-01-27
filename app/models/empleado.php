@@ -13,7 +13,7 @@ class Empleado
   {
     $sqlGE = $this->conn->prepare("SELECT * FROM empleado A 
             INNER JOIN cargo B ON A.CARGO = B.ID_CARGO
-            INNER JOIN departamento C ON A.DEPARTAMENTO = C.ID_DEPARTAMENTO");
+            INNER JOIN departamento C ON A.DEPARTAMENTO = C.ID_DEPARTAMENTO WHERE A.ACTIVO = b'1'");
     if ($sqlGE === false) {
       die("Error en la preparación de la consulta: " . $this->conn->error);
     }
@@ -83,6 +83,47 @@ class Empleado
     } else {
       $result['success'] = false;
       $result['message'] = "No hemos podido registrar al nuevo trabajador, comuniquese con el encargado del TI";
+    }
+    return $result;
+  }
+
+  public function updateEmpleado($formData)
+  {
+    $result = array();
+
+    $id = $formData['id'];
+    $dni = $formData['dni'];
+    $nombre = $formData['nombre'];
+    $departamento = $formData['departamento'];
+    $cargo = $formData['cargo'];
+
+    $sqlSE = $this->conn->prepare("UPDATE empleado SET DNI = ?, NOMBRE = ?, DEPARTAMENTO = ?, CARGO = ? WHERE ID_EMPLEADO = ?");
+    $sqlSE->bind_param("isiii", $dni, $nombre, $departamento, $cargo, $id);
+    $updateEmploye = $sqlSE->execute();
+    if ($updateEmploye) {
+      $result['success'] = true;
+      $result['message'] = "El trabajador ha sido actualizado exitosamente";
+    } else {
+      $result['success'] = false;
+      $result['message'] = "No hemos podido actualizar el trabajador, comuniquese con el encargado del TI";
+    }
+    return $result;
+  }
+  public function deleteEmpleado($formData)
+  {
+    $result = array();
+
+    $id = $formData['id'];
+
+    $sqlSE = $this->conn->prepare("UPDATE empleado SET ACTIVO = b'0' WHERE ID_EMPLEADO = ?");
+    $sqlSE->bind_param("i", $id);
+    $deleteEmploye = $sqlSE->execute();
+    if ($deleteEmploye) {
+      $result['success'] = true;
+      $result['message'] = "El trabajador ha sido eliminado exitosamente";
+    } else {
+      $result['success'] = false;
+      $result['message'] = "No hemos podido eliminar el trabajador, comuniquese con el encargado del TI";
     }
     return $result;
   }

@@ -20,6 +20,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $empleados = $model->registerEmpleado($_POST);
       echo json_encode($empleados);
       break;
+    case 'updateEmpleado':
+      $empleados = $model->updateEmpleado($_POST);
+      echo json_encode($empleados);
+      break;
+    case 'deleteEmpleado':
+      $empleados = $model->deleteEmpleado($_POST);
+      echo json_encode($empleados);
+      break;
     // default:
     //   # code...
     //   break;

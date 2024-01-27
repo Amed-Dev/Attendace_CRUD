@@ -1,22 +1,20 @@
-const $ = (selector, context = document) => context.querySelector(selector);
-const $$ = (selector, context = document) => context.querySelectorAll(selector);
-
+import { $, $$ } from "./utils/dom.js";
 const success = $("#success");
 const error = $("#error");
 // const warning = $("#warning");
 
 //---empleado
-const dataLoad = $("#registerEmployeForm");
-// const dataUpdate = $("#moviesUpdate");
-// const dataDelete = $("#moviesDelete");
+const dataLoadE = $("#registerEmployeForm");
+const dataUpdateE = $("#updateEmployeForm");
+const dataDeleteE = $("#deleteEmployeForm");
 
-const modalSE = new bootstrap.Modal($("#modalRegisterUser"));
-// const modalU = new bootstrap.Modal($("#modalEdit"));
-// const modalD = new bootstrap.Modal($("#modalDelete"));
-// const btnDelete = $("#btn-D");
+const modalSE = new bootstrap.Modal($("#modalRegisterEmploye"));
+const modalUE = new bootstrap.Modal($("#editarRegistro"));
+const modalDE = new bootstrap.Modal($("#eliminarRegistro"));
+const btnDeleteE = $("#btn-DE");
 
 //edit and delete modal
-let modalSaveE = $("#modalRegisterUser");
+let modalSaveE = $("#modalRegisterEmploye");
 let modalEditE = $("#editarRegistro");
 let modalDeleteE = $("#eliminarRegistro");
 
@@ -50,7 +48,7 @@ async function DBOperation(url, method, HTMLFormEl, myModal) {
           success.classList.remove("d-block");
           success.classList.add("d-none");
           $("#msg_success").innerHTML = "";
-          getMoviesCategory();
+          getEmpleadosList();
         }, 3000);
       } else if (response.warning) {
         warning.classList.remove("d-none");
@@ -170,7 +168,7 @@ function mostrarDatos(datos) {
     contenidoHTML += "<td>" + dato.fecha_registro + "</td>";
     contenidoHTML +=
       "<td class='text-center'>" +
-      '<div class="d-flex flex-column justify-content-center align-itemscenter gap-4 mx-2"> <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editarRegistro" data-bs-id="' +
+      '<div class="d-flex flex-column justify-content-center   gap-4 m-2 py-2"> <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editarRegistro" data-bs-id="' +
       dato.id +
       '"><i class="fa-solid fa-pen-to-square"></i> Editar</button>' +
       '<button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#eliminarRegistro" data-bs-id="' +
@@ -193,10 +191,26 @@ function clearModal() {
   $(".modal-body .cargo").selectedIndex = 0;
 }
 
+function mostrarFechaHora() {
+  const ahora = new Date();
+  const fecha = ahora.toLocaleDateString();
+  const hora = ahora.toLocaleTimeString();
+  const fechaHora = `${fecha} ${hora}`;
+  document.getElementById("dateTime").textContent = fechaHora;
+  const saludo =
+    ahora.getHours() >= 6 && ahora.getHours() < 12
+      ? "Buenos días"
+      : ahora.getHours() >= 12 && ahora.getHours() < 18
+      ? "Buenas tardes"
+      : "Buenas noches";
+  document.getElementById("saludo").textContent = saludo;
+}
+setInterval(mostrarFechaHora, 1000);
+
 //listar cargos según el departamento
 document.addEventListener("DOMContentLoaded", function () {
-  let departamentos = document.querySelectorAll(".departamento");
-  let cargos = document.querySelectorAll(".cargo");
+  let departamentos = $$(".departamento");
+  let cargos = $$(".cargo");
 
   departamentos.forEach(function (departamento, index) {
     cargarCargos(departamento, cargos[index]);
@@ -207,15 +221,32 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // registrar nuevo trabajador
-dataLoad.addEventListener("submit", (event) => {
+dataLoadE.addEventListener("submit", (event) => {
   event.preventDefault();
   let modal = modalSE;
   let url = "../../app/controllers/empleadoController.php";
   let method = "registerEmpleado";
-  let HTMLFormElement = dataLoad;
+  let HTMLFormElement = dataLoadE;
   DBOperation(url, method, HTMLFormElement, modal);
 });
-
+//actualizar empleado
+dataUpdateE.addEventListener("submit", (event) => {
+  event.preventDefault();
+  let modal = modalUE;
+  let url = "../../app/controllers/empleadoController.php";
+  let method = "updateEmpleado";
+  let HTMLFormElement = dataUpdateE;
+  DBOperation(url, method, HTMLFormElement, modal);
+});
+//eliminar empleado
+btnDeleteE.addEventListener("click", (event) => {
+  event.preventDefault();
+  let modal = modalDE;
+  let url = "../../app/controllers/empleadoController.php";
+  let method = "deleteEmpleado";
+  let HTMLFormElement = dataDeleteE;
+  DBOperation(url, method, HTMLFormElement, modal);
+});
 modalEditE.addEventListener("hide.bs.modal", (event) => {
   const $ = (selector, context = modalEditE) => context.querySelector(selector);
   $(".modal-body #dni").value = "";
@@ -237,11 +268,6 @@ modalEditE.addEventListener("shown.bs.modal", (event) => {
 
   async function getEmpleadosByID() {
     try {
-      // Verificar que id esté definido
-      if (typeof id === "undefined") {
-        console.error("El valor de id no está definido.");
-        return;
-      }
       let url = "../../app/controllers/empleadoController.php";
       const formData = new FormData();
       formData.append("method", "getEmpleadosByID");
@@ -254,9 +280,8 @@ modalEditE.addEventListener("shown.bs.modal", (event) => {
         throw new Error("Error al obtener datos del servidor");
       }
       const datos = await response.json();
-      console.log(datos);
       if (datos.length > 0) {
-        const primerDato = datos[0]; // Tomar el primer objeto del array
+        const primerDato = datos[0];
         inputID.value = primerDato.id;
         inputDni.value = primerDato.dni;
         inputNombre.value = primerDato.nombre;
@@ -278,24 +303,32 @@ modalDeleteE.addEventListener("shown.bs.modal", (event) => {
   let button = event.relatedTarget;
   let id = button.getAttribute("data-bs-id");
   let inputID = $(".modal-body #id");
-  let poster = $(".modal-body #posterPath");
 
-  let url = "../../app/peliculas/getMovieID.php";
-
-  fetch(url, {
-    method: "POST",
-
-    body: JSON.stringify({
-      id: id,
-    }),
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      inputID.value = data.id;
-      poster.value = data.poster;
-    })
-    .catch((err) => console.error(err));
+  async function getEmpleadosByID() {
+    try {
+      let url = "../../app/controllers/empleadoController.php";
+      const formData = new FormData();
+      formData.append("method", "getEmpleadosByID");
+      formData.append("id", id);
+      const response = await fetch(url, {
+        method: "POST",
+        body: formData,
+      });
+      if (!response.ok) {
+        throw new Error("Error al obtener datos del servidor");
+      }
+      const datos = await response.json();
+      if (datos.length > 0) {
+        const primerDato = datos[0];
+        inputID.value = primerDato.id;
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  getEmpleadosByID();
 });
+
 window.onload = function () {
   getEmpleadosList();
   getDepartamento();

@@ -4,6 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- <link rel="stylesheet" href="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"> -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="../../assets/css/styles.css">
   <link rel="stylesheet" href="../../assets/css/all.min.css">
   <link rel="stylesheet" href="../../assets/css/stylesCustomized.css">
@@ -12,70 +14,79 @@
 </head>
 
 <body>
-  <div class="container p-4 my-2">
-    <h1 class="text-center my-3"> <i class="fa-solid fa-users-between-lines"></i> Registro de Empleados</h1>
+  <div class="container-fluid">
+    <div class="row flex-nowrap">
+      <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+        <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100 position-fixed ">
+          <div class="d-flex align-items-start mb-sm-auto mt-4 mb-0 ">
+            <div class="nav flex-column nav-pills me-3 " id="v-pills-tab" role="tablist" aria-orientation="vertical">
+              <button class="nav-link active text-start" id="v-pills-home-tab" data-bs-toggle="pill"
+                data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home"
+                aria-selected="true"> <i class="fs-4 bi-house"></i>
+                <span class="ms-1 d-none d-sm-inline">Home</span></button>
+              <button class="nav-link text-start " id="v-pills-profile-tab" data-bs-toggle="pill"
+                data-bs-target="#v-pills-asistencia" type="button" role="tab" aria-controls="v-pills-asistencia"
+                aria-selected="false"><i class="fs-4 bi-calendar-check"></i> <span
+                  class="ms-1 d-none d-sm-inline">Asistencia</span></button>
+              <button class="nav-link text-start" id="v-pills-messages-tab" data-bs-toggle="pill"
+                data-bs-target="#v-pills-trabajadores" type="button" role="tab" aria-controls="v-pills-trabajadores"
+                aria-selected="false"><i class="fs-4 bi-people"></i> <span
+                  class="ms-1 d-none d-sm-inline">Trabajadores</span></button>
+            </div>
+          </div>
 
-    <!-- Button trigger modal guardar-->
-    <div class="row justify-content-end mb-5 my-5">
-      <button type="button" class="btn btn-primary col-auto" data-bs-toggle="modal" data-bs-target="#modalRegisterUser">
-        <i class="fa-solid fa-circle-plus"></i>
-        Nuevo empleado
-      </button>
-    </div>
-    <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
-      <symbol id="check-circle-fill" viewBox="0 0 16 16">
-        <path
-          d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
-      </symbol>
-      <symbol id="exclamation-triangle-fill" viewBox="0 0 16 16">
-        <path
-          d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
-      </symbol>
-    </svg>
-    <div class="alert alert-success d-flex align-items-center justify-content-center fixed-top d-none icon-link"
-      id="success" role="alert">
-      <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Success:">
-        <use xlink:href="#check-circle-fill" />
-      </svg>
-      <div id="msg_success" class="fs-3 fw-bold">
+          <hr>
+          <div class="dropdown pb-4">
+            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+              id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+              <img src="../../assets/img/admin.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
+              <span class="d-none d-sm-inline mx-1">Admin</span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+              <li><a class="dropdown-item" href="#">Profile</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="#">Sign out</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="tab-content" id="v-pills-tabContent">
+          <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab"
+            tabindex="0">
+            <div class="d-flex align-items-center justify-content-center min-vh-100 ">
+              <div class="card  text-center w-50">
+                <div class="card-header fs-4 text-start text-info-emphasis ">
+                  <span id="saludo"></span>
+                </div>
+                <div class="card-body mh" id="home-card-body">
+                  <div class="blur container">
+                    <h5 class="card-title fs-1">Bienvenido</h5>
+                    <p class="card-text">a <span class="text-danger-emphasis fs-4 fw-bold ">TECHS</span></p>
+                  </div>
+
+                </div>
+                <div class="card-footer text-body-secondary">
+                  <span class="text-info fs-5" id="dateTime"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="v-pills-asistencia" role="tabpanel" aria-labelledby="v-pills-asistencia-tab"
+            tabindex="0">
+            <?php include "./asistencia/asistencia.php"; ?>
+          </div>
+          <div class="tab-pane fade" id="v-pills-trabajadores" role="tabpanel"
+            aria-labelledby="v-pills-trabajadores-tab" tabindex="0">
+            <?php include "./empleado/empleado.php"; ?>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="alert alert-danger d-flex align-items-center justify-content-center fixed-top d-none icon-link "
-      id="error" role="alert">
-      <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Danger:">
-        <use xlink:href="#exclamation-triangle-fill" />
-      </svg>
-      <div id="msg_error" class="fs-3 fw-bold">
-      </div>
-    </div>
-    <!-- tabla para mostrar los datos -->
-    <div class="table-responsive">
-      <table id="tabla" class="table table table-sm table-striped table-hover">
-        <thead class="text-center">
-          <tr>
-            <th>DNI</th>
-            <th>Nombre</th>
-            <th>Departamento</th>
-            <th>Cargo</th>
-            <th>Fecha Registro</th>
-            <th>Acción</th>
-          </tr>
-        </thead>
-        <tbody id="empleadosList">
-
-        </tbody>
-      </table>
-    </div>
-
   </div>
-  <?php
-  include "./empleado/register.php";
-  include "./empleado/actualizaEmpleado.php";
-  include "./empleado/eliminarRegistro.php";
-
-  ?>
   <script src="../../assets/js/bootstrap.bundle.min.js"></script>
-  <script src="../../assets/js/main.js"></script>
 </body>
 
 </html>
