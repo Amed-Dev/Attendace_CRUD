@@ -47,10 +47,11 @@
           <th>Departamento</th>
           <th>Cargo</th>
           <th>Asistencia</th>
+          <th>Fecha</th>
           <th>Acción</th>
         </tr>
       </thead>
-      <tbody id="asistenciaList">
+      <tbody id="asistenciaList" class="text-center ">
 
       </tbody>
     </table>
@@ -60,7 +61,6 @@
 <?php
 include "./asistencia/registerAsistencia.php";
 include "./asistencia/actualizaAsistencia.php";
-include "./asistencia/eliminarAsistencia.php";
 ?>
 
 <script type="module" src="../../assets/js/main_asistencia.js"></script>

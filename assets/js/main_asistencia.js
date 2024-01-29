@@ -1,23 +1,18 @@
 import { $, $$ } from "./utils/dom.js";
 const success_A = $("#success_A");
 const error_A = $("#error_A");
-// // const warning = $("#warning");
 const entradaDni = $("#dni");
 
 //---asistencia
 const dataLoadA = $("#registerAttendanceForm");
-// const dataUpdateA = $("#updateEmployeForm");
-// const dataDeleteA = $("#deleteEmployeForm");
+const dataUpdateA = $("#updateAttendanceForm");
 
 const modalSA = new bootstrap.Modal($("#modalRegisterAttendance"));
-// const modalUE = new bootstrap.Modal($("#editarRegistro"));
-// const modalDE = new bootstrap.Modal($("#eliminarRegistro"));
-// const btnDeleteE = $("#btn-DE");
+const modalUA = new bootstrap.Modal($("#modalUpdateAttendance"));
 
 //edit and delete modal
 let modalSaveA = $("#modalRegisterAttendance");
-// let modalEditE = $("#editarRegistro");
-// let modalDeleteE = $("#eliminarRegistro");
+let modalEditA = $("#modalUpdateAttendance");
 
 // //---asistencia
 
@@ -38,34 +33,34 @@ async function DBOperation(url, method, HTMLFormEl, myModal) {
       const result = await response.json();
       if (result.success) {
         setTimeout(() => {
-          success.classList.remove("d-none");
-          $("#msg_success").insertAdjacentHTML("afterbegin", result.message);
+          success_A.classList.remove("d-none");
+          $("#msg_success_A").insertAdjacentHTML("afterbegin", result.message);
           myModal.hide();
           clearModal();
-          success.classList.add("d-block");
+          success_A.classList.add("d-block");
         }, 1000);
 
         setTimeout(() => {
-          success.classList.remove("d-block");
-          success.classList.add("d-none");
-          $("#msg_success").innerHTML = "";
-          getEmpleadosList();
+          success_A.classList.remove("d-block");
+          success_A.classList.add("d-none");
+          $("#msg_success_A").innerHTML = "";
+          getAttendanceList();
         }, 3000);
       } else if (response.warning) {
         warning.classList.remove("d-none");
         warning.classList.add("d-block");
-        $("#msg_error").insertAdjacentHTML("afterbegin", response.message);
+        $("#msg_error_A").insertAdjacentHTML("afterbegin", response.message);
       } else {
         const errorText = `Error: ${result.message}`;
-        error.classList.remove("d-none");
-        error.classList.add("d-block");
-        $("#msg_error").insertAdjacentHTML("afterbegin", errorText);
+        error_A.classList.remove("d-none");
+        error_A.classList.add("d-block");
+        $("#msg_error_A").insertAdjacentHTML("afterbegin", errorText);
       }
     } else {
       const errorText = `Error: ${response.status} - ${response.statusText}`;
-      error.classList.remove("d-none");
-      error.classList.add("d-block");
-      $("#msg_error").insertAdjacentHTML("afterbegin", errorText);
+      error_A.classList.remove("d-none");
+      error_A.classList.add("d-block");
+      $("#msg_error_A").insertAdjacentHTML("afterbegin", errorText);
     }
   } catch (error) {
     console.error("Error:", error);
@@ -108,21 +103,8 @@ async function getInfoAttendance(urlController, method, selectHTML) {
     console.error("Error al realizar la solicitud:", error);
   }
 }
-// //listar cargos
-// async function cargarCargos(departamentoSelect, cargoSelect) {
-//   let selectedDpto = departamentoSelect.value;
 
-//   // Limpiar el contenido actual
-//   cargoSelect.innerHTML = "";
-
-//   // Listar cargos
-//   let urlCargo = "../../app/controllers/cargoController.php";
-//   let methodC = "getCargo";
-//   let selectC = "cargo";
-//   await getInfoPuestoEmpleado(urlCargo, methodC, selectC, selectedDpto);
-// }
-
-//listar departamentos
+//listar estados de asistencia
 function getAttendanceStatus() {
   let urlAsistencia = "../../app/controllers/asistenciaController.php";
   let methodA = "getStatusAttendance";
@@ -130,67 +112,77 @@ function getAttendanceStatus() {
   getInfoAttendance(urlAsistencia, methodA, selectA);
 }
 
-// async function getEmpleadosList() {
-//   try {
-//     const formData = new FormData();
-//     formData.append("method", "getEmpleados");
-//     // almacenar la respuesta del servidor
-//     const response = await fetch(
-//       "../../app/controllers/empleadoController.php",
-//       {
-//         method: "POST",
-//         body: formData,
-//       }
-//     );
-//     if (!response.ok) {
-//       throw new Error("No se puede obtener la información de los empleados");
-//     }
-//     const datos = await response.json();
-//     mostrarDatos(datos);
-//   } catch (error) {
-//     console.error(error.message);
-//   }
-// }
+async function getAttendanceList() {
+  try {
+    const formData = new FormData();
+    formData.append("method", "getListAttendance");
+    // almacenar la respuesta del servidor
+    const response = await fetch(
+      "../../app/controllers/asistenciaController.php",
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
+    if (!response.ok) {
+      throw new Error("No se puede obtener la información de los empleados");
+    }
+    const datos = await response.json();
+    mostrarDatosA(datos);
+  } catch (error) {
+    console.error(error.message);
+  }
+}
 
-// // Mostrar los empleados en la tabla
-// function mostrarDatos(datos) {
-//   var contenidoHTML = "";
-//   datos.forEach(function (dato) {
-//     contenidoHTML += "<tr class='align-middle'>";
-//     contenidoHTML += "<td>" + dato.dni + "</td>";
-//     contenidoHTML += "<td>" + dato.nombre + "</td>";
-//     contenidoHTML += "<td>" + dato.departamento + "</td>";
-//     contenidoHTML += "<td>" + dato.cargo + "</td>";
-//     contenidoHTML += "<td>" + dato.fecha_registro + "</td>";
-//     contenidoHTML +=
-//       "<td class='text-center'>" +
-//       '<div class="d-flex flex-column justify-content-center   gap-4 m-2 py-2"> <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editarRegistro" data-bs-id="' +
-//       dato.id +
-//       '"><i class="fa-solid fa-pen-to-square"></i> Editar</button>' +
-//       '<button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#eliminarRegistro" data-bs-id="' +
-//       dato.id +
-//       '"><i class="fa-solid fa-trash"></i> Eliminar</button>' +
-//       "</div></td>";
-//     contenidoHTML += "</tr>";
-//   });
+// Mostrar los empleados en la tabla
+function mostrarDatosA(datos) {
+  var contenidoHTML = "";
+  datos.forEach(function (dato) {
+    contenidoHTML += "<tr class='align-middle'>";
+    contenidoHTML += "<td>" + dato.dni + "</td>";
+    contenidoHTML += "<td>" + dato.nombre + "</td>";
+    contenidoHTML += "<td>" + dato.departamento + "</td>";
+    contenidoHTML += "<td>" + dato.cargo + "</td>";
+    contenidoHTML +=
+      "<td>" +
+      '<span class="badge rounded-pill text-bg-' +
+      dato.color +
+      '">' +
+      dato.asistencia +
+      "</span>" +
+      "</td>";
+    contenidoHTML += "<td>" + dato.fecha + "</td>";
+    contenidoHTML +=
+      "<td class='text-center'>" +
+      '<div class="d-flex flex-column justify-content-center   gap-4 m-2 py-2"> <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#modalUpdateAttendance" data-bs-id="' +
+      dato.id +
+      '"><i class="fa-solid fa-pen-to-square"></i> Editar</button>' +
+      "</div></td>";
+    contenidoHTML += "</tr>";
+  });
 
-//   // Muestra el contenido en el contenedor
-//   document.getElementById("empleadosList").innerHTML = contenidoHTML;
-// }
+  // Muestra el contenido en el contenedor
+  document.getElementById("asistenciaList").innerHTML = contenidoHTML;
+}
 
-// //limpiar el modal
-// function clearModal() {
-//   const $ = (selector, context = modalSaveE) => context.querySelector(selector);
-//   $(".modal-body #dni").value = "";
-//   $(".modal-body #nombre").value = "";
-//   $(".modal-body .departamento").selectedIndex = 0;
-//   $(".modal-body .cargo").selectedIndex = 0;
-// }
+//limpiar el modal
+function clearModal() {
+  const $ = (selector, context = modalSaveA) => context.querySelector(selector);
+  $(".modal-body #id").value = "";
+  $(".modal-body #dni").value = "";
+  $(".modal-body #nombre").value = "";
+}
 
+modalSaveA.addEventListener("shown.bs.modal", (event) => {
+  $("#btn-submit").disabled = true;
+  modalSaveA.querySelector(".modal-body #dni").focus();
+});
 //Obtener trabajador según el DNI
 async function showEmploye(str) {
+  let valid = false;
   if (str.toString().length == 0) {
     $("#txtHint").classList.remove("d-none");
+    $("#nombre").value = "...";
     $("#txtHint").innerHTML = "Ningun DNI ingresado";
     return;
   } else {
@@ -211,15 +203,32 @@ async function showEmploye(str) {
       if (response.ok) {
         const result = await response.json();
         if (result.encontrado) {
-          $("#nombre").value = result.encontrado;
-        } else if (str.toString().length < 8) {
+          result.encontrado.forEach(function (empleado) {
+            $("#nombre").classList.remove("nombre-nExits");
+            $("#nombre").classList.add("nombre-found");
+            $("#id").value = empleado.id;
+            $("#nombre").value = empleado.nombre;
+            valid = true;
+          });
+        } else if ((str.toString().length >= 1) & (str.toString().length < 8)) {
+          $("#nombre").classList.remove("nombre-nExits");
           $("#nombre").value = "buscando...";
+          valid;
         } else {
+          $("#nombre").classList.remove("nombre-found");
+          $("#nombre").classList.add("nombre-nExits");
           $("#nombre").value = result.no_existe;
+          valid;
         }
       } else {
         const errorText = `Error: ${response.status} - ${response.statusText}`;
         console.error("Error", errorText);
+      }
+      console.log(valid);
+      if (valid) {
+        $("#btn-submit").disabled = false;
+      } else {
+        $("#btn-submit").disabled = true;
       }
     } catch (error) {
       console.error("Error:", error);
@@ -231,114 +240,79 @@ entradaDni.addEventListener("keyup", () => {
   showEmploye(entradaDni.value);
 });
 
-// // registrar nuevo trabajador
-// dataLoadE.addEventListener("submit", (event) => {
-//   event.preventDefault();
-//   let modal = modalSE;
-//   let url = "../../app/controllers/empleadoController.php";
-//   let method = "registerEmpleado";
-//   let HTMLFormElement = dataLoadE;
-//   DBOperation(url, method, HTMLFormElement, modal);
-// });
-// //actualizar empleado
-// dataUpdateE.addEventListener("submit", (event) => {
-//   event.preventDefault();
-//   let modal = modalUE;
-//   let url = "../../app/controllers/empleadoController.php";
-//   let method = "updateEmpleado";
-//   let HTMLFormElement = dataUpdateE;
-//   DBOperation(url, method, HTMLFormElement, modal);
-// });
-// //eliminar empleado
-// btnDeleteE.addEventListener("click", (event) => {
-//   event.preventDefault();
-//   let modal = modalDE;
-//   let url = "../../app/controllers/empleadoController.php";
-//   let method = "deleteEmpleado";
-//   let HTMLFormElement = dataDeleteE;
-//   DBOperation(url, method, HTMLFormElement, modal);
-// });
-// modalEditE.addEventListener("hide.bs.modal", (event) => {
-//   const $ = (selector, context = modalEditE) => context.querySelector(selector);
-//   $(".modal-body #dni").value = "";
-//   $(".modal-body #nombre").value = "";
-//   $(".modal-body #departamento").value = "";
-//   $(".modal-body #cargo").value = "";
-// });
+// registrar nuevo trabajador
+dataLoadA.addEventListener("submit", (event) => {
+  event.preventDefault();
+  $("#btn-submit").disabled = true;
+  let modal = modalSA;
+  let url = "../../app/controllers/asistenciaController.php";
+  let method = "registerAttendance";
+  let HTMLFormElement = dataLoadA;
+  DBOperation(url, method, HTMLFormElement, modal);
+});
+//actualizar empleado
+dataUpdateA.addEventListener("submit", (event) => {
+  event.preventDefault();
+  $("#btn-submitA").disabled = true;
+  let modal = modalUA;
+  let url = "../../app/controllers/asistenciaController.php";
+  let method = "updateAttendance";
+  let HTMLFormElement = dataUpdateA;
+  DBOperation(url, method, HTMLFormElement, modal);
+});
 
-// modalEditE.addEventListener("shown.bs.modal", (event) => {
-//   const $ = (selector, context = modalEditE) => context.querySelector(selector);
-//   let button = event.relatedTarget;
+modalEditA.addEventListener("hide.bs.modal", (event) => {
+  const $ = (selector, context = modalEditA) => context.querySelector(selector);
+  $(".modal-body #dni").value = "";
+  $(".modal-body #nombre").value = "";
+  $(".modal-body #departamento").value = "";
+  $(".modal-body #cargo").value = "";
+});
 
-//   let id = button.getAttribute("data-bs-id");
-//   let inputID = $(".modal-body #id");
-//   let inputDni = $(".modal-body #dni");
-//   let inputNombre = $(".modal-body #nombre");
-//   let inputDepartamento = $(".modal-body #departamento");
-//   let inputCargo = $(".modal-body #cargo");
+modalEditA.addEventListener("shown.bs.modal", (event) => {
+  const $ = (selector, context = modalEditA) => context.querySelector(selector);
+  let button = event.relatedTarget;
+  $(".modal-body #asistencia").focus();
 
-//   async function getEmpleadosByID() {
-//     try {
-//       let url = "../../app/controllers/empleadoController.php";
-//       const formData = new FormData();
-//       formData.append("method", "getEmpleadosByID");
-//       formData.append("id", id);
-//       const response = await fetch(url, {
-//         method: "POST",
-//         body: formData,
-//       });
-//       if (!response.ok) {
-//         throw new Error("Error al obtener datos del servidor");
-//       }
-//       const datos = await response.json();
-//       if (datos.length > 0) {
-//         const primerDato = datos[0];
-//         inputID.value = primerDato.id;
-//         inputDni.value = primerDato.dni;
-//         inputNombre.value = primerDato.nombre;
-//         inputDepartamento.value = primerDato.departamento;
-//         cargarCargos(inputDepartamento, inputCargo);
-//         await new Promise((resolve) => setTimeout(resolve, 500));
-//         inputCargo.value = primerDato.cargo;
-//       }
-//     } catch (error) {
-//       console.error(error);
-//     }
-//   }
-//   getEmpleadosByID();
-// });
+  let id = button.getAttribute("data-bs-id");
+  let inputID = $(".modal-body #id");
+  let inputDni = $(".modal-body #dni");
+  let inputNombre = $(".modal-body #nombre");
+  let inputDepartamento = $(".modal-body #departamento");
+  let inputCargo = $(".modal-body #cargo");
+  let inputAsitencia = $(".modal-body #asistencia");
 
-// modalDeleteE.addEventListener("shown.bs.modal", (event) => {
-//   const $ = (selector, context = modalDeleteE) =>
-//     context.querySelector(selector);
-//   let button = event.relatedTarget;
-//   let id = button.getAttribute("data-bs-id");
-//   let inputID = $(".modal-body #id");
+  async function getEmpleadosByID() {
+    try {
+      let url = "../../app/controllers/asistenciaController.php";
+      const formData = new FormData();
+      formData.append("method", "getListAttendanceByID");
+      formData.append("id", id);
+      const response = await fetch(url, {
+        method: "POST",
+        body: formData,
+      });
+      if (!response.ok) {
+        throw new Error("Error al obtener datos del servidor");
+      }
+      const datos = await response.json();
+      if (datos.length > 0) {
+        const primerDato = datos[0];
+        inputID.value = primerDato.id;
+        inputDni.value = primerDato.dni;
+        inputNombre.value = primerDato.nombre;
+        inputDepartamento.value = primerDato.departamento;
+        inputCargo.value = primerDato.cargo;
+        inputAsitencia.value = primerDato.asistencia;
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  getEmpleadosByID();
+});
 
-//   async function getEmpleadosByID() {
-//     try {
-//       let url = "../../app/controllers/empleadoController.php";
-//       const formData = new FormData();
-//       formData.append("method", "getEmpleadosByID");
-//       formData.append("id", id);
-//       const response = await fetch(url, {
-//         method: "POST",
-//         body: formData,
-//       });
-//       if (!response.ok) {
-//         throw new Error("Error al obtener datos del servidor");
-//       }
-//       const datos = await response.json();
-//       if (datos.length > 0) {
-//         const primerDato = datos[0];
-//         inputID.value = primerDato.id;
-//       }
-//     } catch (error) {
-//       console.error(error);
-//     }
-//   }
-//   getEmpleadosByID();
-// });
 window.addEventListener("load", function () {
+  getAttendanceList();
   getAttendanceStatus();
 });

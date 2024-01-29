@@ -9,9 +9,10 @@
       </div>
       <div class="modal-body">
         <form action="" method="POST" enctype="multipart/form-data" id="registerAttendanceForm">
+          <input type="hidden" id="id" name="id">
           <div class="mb-3">
             <label for="dni" class="form-label">DNI: </label>
-            <input type="number" class="form-control" id="dni" name="dni" placeholder="80394852">
+            <input type="number" class="form-control " id="dni" name="dni" placeholder="80394852">
           </div>
           <div class="mb-3">
             <div class="alert alert-warning d-none" id="txtHint"></div>
@@ -27,7 +28,7 @@
           </div>
           <div class="d-flex justify-content-end gap-2 ">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-primary"> <i class="fa-solid fa-save" id="btn-submit"></i>
+            <button type="submit" class="btn btn-primary" id="btn-submit"> <i class="fa-solid fa-save" ></i>
               Guardar</button>
           </div>
         </form>

@@ -15,18 +15,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $asistencia = $model->registerAttendance($_POST);
       echo json_encode($asistencia);
       break;
-    // case 'registerEmpleado':
-    //   $empleados = $model->registerEmpleado($_POST);
-    //   echo json_encode($empleados);
-    //   break;
-    // case 'updateEmpleado':
-    //   $empleados = $model->updateEmpleado($_POST);
-    //   echo json_encode($empleados);
-    //   break;
-    // case 'deleteEmpleado':
-    //   $empleados = $model->deleteEmpleado($_POST);
-    //   echo json_encode($empleados);
-    //   break;
+    case 'getListAttendance':
+      $asistencia = $model->getListAttendance();
+      echo json_encode($asistencia);
+      break;
+    case 'getListAttendanceByID':
+      $empleados = $model->getListAttendanceByID($_POST);
+      echo json_encode($empleados);
+      break;
+    case 'updateAttendance':
+      $empleados = $model->updateAttendance($_POST);
+      echo json_encode($empleados);
+      break;
     case 'getEmpleadoByDNI':
       $asistencia = $model->getSuggestionForDNI($_POST);
       echo json_encode($asistencia);

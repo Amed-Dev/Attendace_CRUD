@@ -207,6 +207,11 @@ function mostrarFechaHora() {
 }
 setInterval(mostrarFechaHora, 1000);
 
+
+modalSaveE.addEventListener("shown.bs.modal", (event) => {
+  modalSaveE.querySelector(".modal-body #dni").focus();
+});
+
 //listar cargos según el departamento
 document.addEventListener("DOMContentLoaded", function () {
   let departamentos = $$(".departamento");
@@ -223,6 +228,7 @@ document.addEventListener("DOMContentLoaded", function () {
 // registrar nuevo trabajador
 dataLoadE.addEventListener("submit", (event) => {
   event.preventDefault();
+  $("#btn-submitRE").disabled = true;
   let modal = modalSE;
   let url = "../../app/controllers/empleadoController.php";
   let method = "registerEmpleado";
@@ -232,6 +238,7 @@ dataLoadE.addEventListener("submit", (event) => {
 //actualizar empleado
 dataUpdateE.addEventListener("submit", (event) => {
   event.preventDefault();
+  $("#btn-submitAE").disabled = true;
   let modal = modalUE;
   let url = "../../app/controllers/empleadoController.php";
   let method = "updateEmpleado";

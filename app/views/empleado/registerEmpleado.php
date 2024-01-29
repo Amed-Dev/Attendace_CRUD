@@ -31,7 +31,7 @@
           </div>
           <div class="d-flex justify-content-end gap-2 ">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-primary"> <i class="fa-solid fa-save" id="btn-submit"></i>
+            <button type="submit" class="btn btn-primary" id="btn-submitRE"> <i class="fa-solid fa-save" ></i>
               Guardar</button>
           </div>
         </form>

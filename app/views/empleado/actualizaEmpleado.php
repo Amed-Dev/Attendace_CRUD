@@ -32,7 +32,7 @@
           </div>
           <div class="d-flex justify-content-end gap-4 ">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-primary"> <i class="fa-solid fa-floppy-disk"></i> Guardar</button>
+            <button type="submit" class="btn btn-primary" id="btn-submitAE"> <i class="fa-solid fa-floppy-disk"></i> Guardar</button>
           </div>
         </form>
       </div>

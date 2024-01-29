@@ -50,7 +50,7 @@
           <th>Acción</th>
         </tr>
       </thead>
-      <tbody id="empleadosList">
+      <tbody id="empleadosList" class="text-center">
 
       </tbody>
     </table>
@@ -58,8 +58,8 @@
 
 </div>
 <?php
-include "./empleado/register.php";
+include "./empleado/registerEmpleado.php";
 include "./empleado/actualizaEmpleado.php";
-include "./empleado/eliminarRegistro.php";
+include "./empleado/eliminarEmpleado.php";
 ?>
 <script type="module" src="../../assets/js/main_empleado.js"></script>

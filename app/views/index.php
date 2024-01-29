@@ -4,7 +4,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- <link rel="stylesheet" href="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"> -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="../../assets/css/styles.css">
   <link rel="stylesheet" href="../../assets/css/all.min.css">
@@ -15,35 +14,34 @@
 
 <body>
   <div class="container-fluid">
-    <div class="row flex-nowrap">
-      <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+    <div class="row">
+      <div class="col-lg-auto bg-dark sticky-top ">
         <div
-          class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100 position-fixed ">
-          <div class="d-flex align-items-start mb-sm-auto mt-4 mb-0 ">
-            <div class="nav flex-column nav-pills me-3 " id="v-pills-tab" role="tablist" aria-orientation="vertical">
-              <button class="nav-link active text-start" id="v-pills-home-tab" data-bs-toggle="pill"
-                data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home"
-                aria-selected="true"> <i class="fs-4 bi-house"></i>
-                <span class="ms-1 d-none d-sm-inline">Home</span></button>
-              <button class="nav-link text-start " id="v-pills-profile-tab" data-bs-toggle="pill"
-                data-bs-target="#v-pills-asistencia" type="button" role="tab" aria-controls="v-pills-asistencia"
-                aria-selected="false"><i class="fs-4 bi-calendar-check"></i> <span
-                  class="ms-1 d-none d-sm-inline">Asistencia</span></button>
-              <button class="nav-link text-start" id="v-pills-messages-tab" data-bs-toggle="pill"
-                data-bs-target="#v-pills-trabajadores" type="button" role="tab" aria-controls="v-pills-trabajadores"
-                aria-selected="false"><i class="fs-4 bi-people"></i> <span
-                  class="ms-1 d-none d-sm-inline">Trabajadores</span></button>
-            </div>
+          class="d-flex flex-lg-column flex-row flex-nowrap align-items-center text-white sticky-top min-vh-lg-100 pt-xl-4 pt-lg-2">
+          <span class="d-block text-danger-emphasis fs-4 fw-bold border rounded-3 p-3 mx-3 border-info ">TECHS</span>
+          <div class="nav nav-pills nav-flush flex-lg-column flex-row flex-nowrap mb-auto mx-auto text-center p-3 "
+            id="v-pills-tab" role="tablist" aria-orientation="vertical">
+            <button class="nav-link active text-lg-start text-md-center" id="v-pills-home-tab" data-bs-toggle="pill"
+              data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">
+              <i class="fs-4 bi-house"></i>
+              <span class="ms-1 d-none d-sm-inline">Home</span></button>
+            <button class="nav-link text-lg-start text-md-center" id="v-pills-profile-tab" data-bs-toggle="pill"
+              data-bs-target="#v-pills-asistencia" type="button" role="tab" aria-controls="v-pills-asistencia"
+              aria-selected="false"><i class="fs-4 bi-calendar-check"></i> <span
+                class="ms-1 d-none d-sm-inline">Asistencia</span></button>
+            <button class="nav-link text-lg-start text-md-center" id="v-pills-messages-tab" data-bs-toggle="pill"
+              data-bs-target="#v-pills-trabajadores" type="button" role="tab" aria-controls="v-pills-trabajadores"
+              aria-selected="false"><i class="fs-4 bi-people"></i> <span
+                class="ms-1 d-none d-sm-inline">Trabajadores</span></button>
           </div>
-
-          <hr>
-          <div class="dropdown pb-4">
-            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+          <div class="dropdown p-3 align-self-lg-start" id="dropdownContainer">
+            <a href="#"
+              class="d-flex align-items-center justify-content-center p-3 text-white text-decoration-none dropdown-toggle"
               id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
               <img src="../../assets/img/admin.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
               <span class="d-none d-sm-inline mx-1">Admin</span>
             </a>
-            <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+            <ul class="dropdown-menu dropdown-menu-dark text-small shadow ">
               <li><a class="dropdown-item" href="#">Profile</a></li>
               <li>
                 <hr class="dropdown-divider">
@@ -53,7 +51,7 @@
           </div>
         </div>
       </div>
-      <div class="col">
+      <div class="col-md p-0 min-vh-100 ">
         <div class="tab-content" id="v-pills-tabContent">
           <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab"
             tabindex="0">
