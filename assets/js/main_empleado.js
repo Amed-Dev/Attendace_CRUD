@@ -1,4 +1,5 @@
 import { $, $$ } from "./utils/dom.js";
+import { getAttendanceList } from "./main_asistencia.js";
 const success = $("#success");
 const error = $("#error");
 // const warning = $("#warning");
@@ -48,6 +49,7 @@ async function DBOperation(url, method, HTMLFormEl, myModal) {
           success.classList.remove("d-block");
           success.classList.add("d-none");
           $("#msg_success").innerHTML = "";
+          getAttendanceList();
           getEmpleadosList();
         }, 3000);
       } else if (response.warning) {
@@ -206,7 +208,6 @@ function mostrarFechaHora() {
   document.getElementById("saludo").textContent = saludo;
 }
 setInterval(mostrarFechaHora, 1000);
-
 
 modalSaveE.addEventListener("shown.bs.modal", (event) => {
   modalSaveE.querySelector(".modal-body #dni").focus();
