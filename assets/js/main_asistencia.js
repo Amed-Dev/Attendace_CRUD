@@ -112,7 +112,7 @@ function getAttendanceStatus() {
   getInfoAttendance(urlAsistencia, methodA, selectA);
 }
 
-async function getAttendanceList() {
+export async function getAttendanceList() {
   try {
     const formData = new FormData();
     formData.append("method", "getListAttendance");

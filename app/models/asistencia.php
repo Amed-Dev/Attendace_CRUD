@@ -79,18 +79,15 @@ class Asistencia
     }
     $sqlGAID->execute();
     $resultadoAttendance = $sqlGAID->get_result();
-    $bgColor = [1 => 'success', 2 => 'danger', 3 => 'warning', 4 => 'info'];
     $listAttendID = [];
     if ($resultadoAttendance->num_rows > 0) {
       while ($row = $resultadoAttendance->fetch_assoc()) {
-        $color = $bgColor[$row['ID_ESTADO']];
         $listAttendID[] = array(
           'id' => $row['ID_EMPLEADO'],
           'dni' => $row['DNI'],
           'nombre' => $row['NOMBRE'],
           'departamento' => $row['NOMBRE_DEPARTAMENTO'],
           'cargo' => $row['NOMBRE_CARGO'],
-          'color' => $color,
           'asistencia' => $row['ID'],
         );
       }
