@@ -141,7 +141,7 @@ class Asistencia
     $result = array();
     $dni = $formData['dni'];
 
-    $sqlGEID = $this->conn->prepare("SELECT NOMBRE, ID_EMPLEADO FROM empleado WHERE DNI = ? LIMIT 1");
+    $sqlGEID = $this->conn->prepare("SELECT NOMBRE, ID_EMPLEADO FROM empleado WHERE DNI = ? AND ACTIVO = b'1' LIMIT 1");
 
     $sqlGEID->bind_param("i", $dni);
 

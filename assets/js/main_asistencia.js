@@ -211,6 +211,7 @@ async function showEmploye(str) {
             valid = true;
           });
         } else if ((str.toString().length >= 1) & (str.toString().length < 8)) {
+          $("#nombre").classList.remove("nombre-found");
           $("#nombre").classList.remove("nombre-nExits");
           $("#nombre").value = "buscando...";
           valid;
@@ -224,12 +225,10 @@ async function showEmploye(str) {
         const errorText = `Error: ${response.status} - ${response.statusText}`;
         console.error("Error", errorText);
       }
-      console.log(valid);
-      if (valid) {
-        $("#btn-submit").disabled = false;
-      } else {
-        $("#btn-submit").disabled = true;
-      }
+      $("#asistenciaR").addEventListener("change", () => {
+        $("#btn-submit").disabled =
+          !valid || $("#asistenciaR").selectedIndex == 0;
+      });
     } catch (error) {
       console.error("Error:", error);
     }
@@ -310,6 +309,60 @@ modalEditA.addEventListener("shown.bs.modal", (event) => {
     }
   }
   getEmpleadosByID();
+});
+
+// Evento para cerrar el sidebar cuando se hace clic fuera de él
+document.addEventListener("click", function (event) {
+  const sidebar = document.querySelector(".sidebar");
+  const navbarToggle = document.querySelector(".navbar-toggler");
+
+  if (!sidebar.contains(event.target) && event.target !== navbarToggle) {
+    const sidebarCollapse = new bootstrap.Collapse(
+      document.getElementById("navbarToggleExternalContent"),
+      { toggle: false }
+    );
+    sidebarCollapse.hide();
+  }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  let targetId;
+  function activarBoton(targetId, pillsTab) {
+    let botonActivo = $(`#${pillsTab} .active`);
+    if (botonActivo) {
+      botonActivo.classList.remove("active");
+    }
+    let botonActivar = $(`#${pillsTab} ${targetId}-tab`);
+    if (botonActivar) {
+      botonActivar.classList.add("active");
+    }
+  }
+
+  function getTarget(botones, pillsTab) {
+    botones.forEach(function (boton) {
+      boton.addEventListener("click", function () {
+        // Obtener el ID del destino del botón
+        targetId = this.getAttribute("data-bs-target");
+        activarBoton(targetId, pillsTab);
+      });
+    });
+  }
+
+  function handleResize() {
+    if (window.innerWidth > 576) {
+      const sidebarCollapse = new bootstrap.Collapse(
+        $("#navbarToggleExternalContent"),
+        { toggle: false }
+      );
+      getTarget($$("#v-pills-tab-sm .nav-link"), "v-pills-tab");
+      sidebarCollapse.hide();
+    } else {
+      getTarget($$("#v-pills-tab .nav-link"), "v-pills-tab-sm");
+    }
+  }
+
+  handleResize();
+  window.addEventListener("resize", handleResize);
 });
 
 window.addEventListener("load", function () {

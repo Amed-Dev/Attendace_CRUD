@@ -22,7 +22,7 @@
           </div>
           <div class="mb-3">
             <label for="asistencia" class="form-label">Asistencia: </label>
-            <select class="form-select asistencia" aria-label="Asistencia" name="asistencia">
+            <select class="form-select asistencia" aria-label="Asistencia" name="asistencia" id="asistenciaR">
               <!-- contenido añadido desde js -->
             </select>
           </div>
